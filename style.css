@@ -1,0 +1,28 @@
+
+.wrapper {
+  display: grid;
+  /*grid-template-columns: 200px 200px 200px 200px;*/
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: 20px;
+}
+
+.one {
+  background-color: #888;
+
+}
+
+.two {
+  background-color: #888;
+
+}
+
+.three {
+  background-color: #888;
+
+}
+
+.four {
+  background-color: #888;
+
+}
