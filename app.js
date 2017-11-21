@@ -53,7 +53,7 @@ var productRank = {
     console.log('tally clicks');
     allProducts[elementId].clickCount++;
     clickTotal++;
-    if(clickTotal > 3) { // change to 15 after testing
+    if(clickTotal >= 5) {
       document.getElementById('image-1').removeEventListener('click', productRank.onClick);
       document.getElementById('image-2').removeEventListener('click', productRank.onClick);
       document.getElementById('image-3').removeEventListener('click', productRank.onClick);
@@ -63,11 +63,19 @@ var productRank = {
 
   displayResults: function() {
     console.log('display results');
-    // subEl.addEventListener('submit', showButton);
+
+    var divEl = document.getElementById('results');
+    var pEl = document.createElement('p');
+    pEl.textContent = 'Results';
+    divEl.appendChild(pEl);
+    for(var k = 0; k < allProducts.length; k++) {
+      pEl = document.createElement('p');
+      pEl.textContent = allProducts[k].clickCount + ' votes for ' + allProducts[k].productName;
+      divEl.appendChild(pEl);
+    }
   },
 
   showButton: function() {
-
   },
 
   onClick: function(event) {
