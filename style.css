@@ -7,22 +7,22 @@
   grid-column-gap: 20px;
 }
 
-.one {
+#results {
   background-color: #888;
 
 }
 
-.two {
+.image-one {
   background-color: #888;
 
 }
 
-.three {
+.image-two {
   background-color: #888;
 
 }
 
-.four {
+.image-three {
   background-color: #888;
 
 }
