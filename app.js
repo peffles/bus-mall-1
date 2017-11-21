@@ -58,6 +58,7 @@ var productRank = {
       document.getElementById('image-2').removeEventListener('click', productRank.onClick);
       document.getElementById('image-3').removeEventListener('click', productRank.onClick);
       productRank.displayResults();
+      productRank.showButton();
     }
   },
 
@@ -75,6 +76,14 @@ var productRank = {
   },
 
   showButton: function() {
+    var btnEl = document.getElementById('button');
+    btnEl.textContent = 'button';
+    document.getElementById('button').addEventListener('click', productRank.reload);
+  },
+
+  reload: function() {
+    location.reload();
+
   },
 
   onClick: function(event) {
