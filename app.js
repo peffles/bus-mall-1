@@ -22,11 +22,26 @@ var productRank = {
   },
 
   displayImages: function() {
+    var indexes = [];
+    while(indexes.length < 3) {
+      var randomIndex = productRank.getRandomIndex();
+      console.log(randomIndex);
+      console.log(allProducts[randomIndex].clickCount);
+      if(allProducts[randomIndex].displayCount === 0) {
+        allProducts[randomIndex].displayCount++;
+        indexes.push(randomIndex);
+      }
+    }
     for(var j = 0; j < 3; j++) {
+      var oldEl = document.getElementById(j);
+      console.log(oldEl);
+      if(oldEl) {
+        oldEl.remove();
+      }
       var divEl = document.getElementById('image-' + (j + 1));
       var imgEl = document.createElement('img');
-      var index1 = productRank.getRandomIndex();
-      imgEl.src = 'img/' + fileNames[index1];
+      imgEl.src = 'img/' + fileNames[indexes[j]];
+      imgEl.id = j;
       divEl.appendChild(imgEl);
     }
   },
@@ -44,7 +59,9 @@ var productRank = {
   },
 
   onClick: function() {
-    // TODO: Hmm... what's going to happen here?
+    console.log('clicked');
+    productRank.displayImages();
   }
 };
 productRank.displayImages();
+document.getElementById('image-1').addEventListener('click', productRank.onClick);

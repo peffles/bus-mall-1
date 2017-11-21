@@ -1,4 +1,3 @@
-
 .wrapper {
   display: grid;
   /*grid-template-columns: 200px 200px 200px 200px;*/
@@ -9,24 +8,20 @@
 
 #results {
   background-color: #888;
-
 }
 
 .image-one {
   background-color: #888;
 
 }
-
 .image-two {
   background-color: #888;
 
 }
-
 .image-three {
   background-color: #888;
 
 }
-
 img {
   height: 200px;
 }
