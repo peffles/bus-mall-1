@@ -1,6 +1,7 @@
 'use strict';
 
 var allProducts = [];
+var clickTotal = 0;
 var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var fileNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
@@ -24,6 +25,7 @@ var productRank = {
   displayImages: function() {
     var indexes = [];
     while(indexes.length < 3) {
+      console.log('stuck');
       var randomIndex = productRank.getRandomIndex();
       console.log(randomIndex);
       console.log(allProducts[randomIndex].clickCount);
@@ -42,26 +44,40 @@ var productRank = {
       var imgEl = document.createElement('img');
       imgEl.src = 'img/' + fileNames[indexes[j]];
       imgEl.id = j;
+      imgEl.className = [indexes[j]];
       divEl.appendChild(imgEl);
     }
   },
 
   tallyClicks: function(elementId) {
-    // TODO: Hmm... what's going to happen here?
+    console.log('tally clicks');
+    allProducts[elementId].clickCount++;
+    clickTotal++;
+    if(clickTotal > 3) { // change to 15 after testing
+      document.getElementById('image-1').removeEventListener('click', productRank.onClick);
+      document.getElementById('image-2').removeEventListener('click', productRank.onClick);
+      document.getElementById('image-3').removeEventListener('click', productRank.onClick);
+      productRank.displayResults();
+    }
   },
 
   displayResults: function() {
-    // TODO: Hmm... what's going to happen here?
+    console.log('display results');
+    // subEl.addEventListener('submit', showButton);
   },
 
   showButton: function() {
-    // TODO: Hmm... what's going to happen here?
+
   },
 
-  onClick: function() {
+  onClick: function(event) {
     console.log('clicked');
+    console.log(event.target.className);
     productRank.displayImages();
+    productRank.tallyClicks(event.target.className);
   }
 };
 productRank.displayImages();
 document.getElementById('image-1').addEventListener('click', productRank.onClick);
+document.getElementById('image-2').addEventListener('click', productRank.onClick);
+document.getElementById('image-3').addEventListener('click', productRank.onClick);
