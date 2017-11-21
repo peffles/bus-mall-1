@@ -22,14 +22,14 @@ var productRank = {
     return Math.floor(Math.random() * allProducts.length);
   },
 
-  displayImages: function() {
+  displayImages: function(dcf) {
     var indexes = [];
     while(indexes.length < 3) {
       console.log('stuck');
       var randomIndex = productRank.getRandomIndex();
       console.log(randomIndex);
       console.log(allProducts[randomIndex].clickCount);
-      if(allProducts[randomIndex].displayCount === 0) {
+      if(allProducts[randomIndex].displayCount === dcf) {
         allProducts[randomIndex].displayCount++;
         indexes.push(randomIndex);
       }
@@ -53,17 +53,17 @@ var productRank = {
     console.log('tally clicks');
     allProducts[elementId].clickCount++;
     clickTotal++;
-    if(clickTotal >= 5) {
+    if(clickTotal >= 15) {
       document.getElementById('image-1').removeEventListener('click', productRank.onClick);
       document.getElementById('image-2').removeEventListener('click', productRank.onClick);
       document.getElementById('image-3').removeEventListener('click', productRank.onClick);
       productRank.displayResults();
+      productRank.showButton();
     }
   },
 
   displayResults: function() {
     console.log('display results');
-
     var divEl = document.getElementById('results');
     var pEl = document.createElement('p');
     pEl.textContent = 'Results';
@@ -76,16 +76,30 @@ var productRank = {
   },
 
   showButton: function() {
+    var btnEl = document.getElementById('button');
+    btnEl.textContent = 'button';
+    document.getElementById('button').addEventListener('click', productRank.reload);
+  },
+
+  reload: function() {
+    location.reload();
+
   },
 
   onClick: function(event) {
     console.log('clicked');
     console.log(event.target.className);
-    productRank.displayImages();
+    if(clickTotal >= 10) {
+      productRank.displayImages(2);
+    } else if(clickTotal >= 5) {
+      productRank.displayImages(1);
+    } else {
+      productRank.displayImages(0);
+    }
     productRank.tallyClicks(event.target.className);
   }
 };
-productRank.displayImages();
+productRank.displayImages(0);
 document.getElementById('image-1').addEventListener('click', productRank.onClick);
 document.getElementById('image-2').addEventListener('click', productRank.onClick);
 document.getElementById('image-3').addEventListener('click', productRank.onClick);
